@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/note",
+      "handler": "Note.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/note/:_id",
+      "handler": "Note.findOne",
+      "config": {
+        "policies": ["isNoteOwner"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/note",
+      "handler": "Note.create",
+      "config": {
+        "policies": ["validateNewNote"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/note/:_id",
+      "handler": "Note.update",
+      "config": {
+        "policies": ["isNoteOwner"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/note/:_id",
+      "handler": "Note.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

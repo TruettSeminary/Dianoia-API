@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/deck",
+      "handler": "Deck.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/deck/:_id",
+      "handler": "Deck.findOne",
+      "config": {
+        "policies": ["allowedToViewDeck"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/deck",
+      "handler": "Deck.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/deck/:_id",
+      "handler": "Deck.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/deck/:_id",
+      "handler": "Deck.destroy",
+      "config": {
+        "policies": ["isDeckOwner"]
+      }
+    }
+  ]
+}

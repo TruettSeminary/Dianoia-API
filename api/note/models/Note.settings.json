@@ -1,0 +1,31 @@
+{
+  "connection": "default",
+  "collectionName": "note",
+  "info": {
+    "name": "note",
+    "description": "A note is a user specific note on a specific card. "
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "note": {
+      "type": "text"
+    },
+    "view_status": {
+      "type": "integer"
+    },
+    "card": {
+      "model": "card",
+      "via": "notes"
+    },
+    "user": {
+      "model": "user",
+      "via": "notes",
+      "plugin": "users-permissions"
+    },
+    "card_score": {
+      "type": "integer"
+    }
+  }
+}

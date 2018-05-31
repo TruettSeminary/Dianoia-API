@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "class",
+  "info": {
+    "name": "class",
+    "description": "Classes contain related sets of decks."
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "decks": {
+      "collection": "deck",
+      "dominant": true,
+      "via": "classes"
+    },
+    "users": {
+      "collection": "user",
+      "via": "classes",
+      "plugin": "users-permissions"
+    }
+  }
+}

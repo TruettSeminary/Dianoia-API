@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/conjugation",
+      "handler": "Conjugation.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/conjugation/:_id",
+      "handler": "Conjugation.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/conjugation",
+      "handler": "Conjugation.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/conjugation/:_id",
+      "handler": "Conjugation.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/conjugation/:_id",
+      "handler": "Conjugation.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -7,9 +7,12 @@
  * This is handy in situations where the Strapi CLI is not relevant or useful.
  */
 
+ const utils = require('./api/utils'); 
+
 process.chdir(__dirname);
 
 (() => {
   const strapi = require('strapi');
+  strapi.apiUtils = utils; 
   strapi.start();
 })();

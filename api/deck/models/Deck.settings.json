@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "deck",
+  "info": {
+    "name": "deck",
+    "description": "Contains a related set of cards"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "classes": {
+      "collection": "class",
+      "via": "decks"
+    },
+    "cards": {
+      "collection": "card",
+      "dominant": true,
+      "via": "decks"
+    },
+    "users": {
+      "collection": "user",
+      "via": "decks",
+      "plugin": "users-permissions"
+    },
+    "owner": {
+      "columnName": "owner",
+      "model": "user",
+      "via": "owned_decks",
+      "plugin": "users-permissions"
+    }
+  }
+}
