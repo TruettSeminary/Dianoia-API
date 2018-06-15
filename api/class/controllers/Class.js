@@ -15,7 +15,17 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    return strapi.services.class.fetchAll(ctx.query);
+    const classes = await strapi.services.class.fetchAll(ctx.query);
+    // return classes; 
+    return classes.map((clazz) => {
+      const decks = clazz.decks.filter((deck) => {
+        if(!deck.owner) return true; 
+        if(deck.owner.id.equals(ctx.state.user._id.id)) return true; 
+        return false; 
+      }); 
+      clazz.decks = decks; 
+      return clazz; 
+    }); 
   },
 
   /**

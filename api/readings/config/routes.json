@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/readings",
+      "handler": "Readings.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/readings/:_id",
+      "handler": "Readings.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/readings",
+      "handler": "Readings.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/readings/:_id",
+      "handler": "Readings.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/readings/:_id",
+      "handler": "Readings.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

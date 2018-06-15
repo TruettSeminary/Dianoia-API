@@ -15,8 +15,6 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    // TODO: filter through notes to ensure only those from the owner go through
-    // Add "where" parameter
     ctx.query.user = ctx.state.user; 
     return strapi.services.note.fetchAll(ctx.query);
   },
