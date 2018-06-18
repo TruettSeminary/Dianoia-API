@@ -15,8 +15,17 @@ module.exports = {
    */
 
   find: async (ctx) => {
+    // filter to ensure only notes that belong to this user appear. 
     ctx.query.user = ctx.state.user; 
-    return strapi.services.note.fetchAll(ctx.query);
+    
+    const notes = await strapi.services.note.fetchAll(ctx.query);
+
+    return notes.map((note) => {
+      note.user = note.user._id; 
+      note.card = note.card._id;  
+
+      return note; 
+    }); 
   },
 
   /**

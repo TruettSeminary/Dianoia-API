@@ -19,14 +19,23 @@ module.exports = {
 
   fetchAll: (params) => {
     const convertedParams = strapi.utils.models.convertParams('card', params);
-
-    return Card
+    const cards = Card
       .find()
       .where(convertedParams.where)
       .sort(convertedParams.sort)
       .skip(convertedParams.start)
       .limit(convertedParams.limit)
-      .populate(_.keys(_.groupBy(_.reject(strapi.models.card.associations, {autoPopulate: false}), 'alias')).join(' '));
+      .populate(
+          _.keys(
+              _.groupBy(
+                  _.reject(strapi.models.card.associations, {autoPopulate: false})
+                  , 'alias')
+          )
+          .join(' ')
+      );
+
+    return cards; 
+      
   },
 
   /**

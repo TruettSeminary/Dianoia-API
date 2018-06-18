@@ -15,7 +15,39 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    return strapi.services.card.fetchAll(ctx.query);
+    // TODO: watch this for performance issues (is there a way to do the filtering in mongo?)
+    const cards = await strapi.services.card.fetchAll(ctx.query);
+
+    const userHasDeck = (deck) => {
+      return ctx.state.user.decks.reduce((curVal, userDeck) => {
+        return curVal || userDeck._id.equals(deck._id); 
+      }, false);
+    }; 
+
+    return cards.reduce((newCards, card) => {
+
+      // filter cards that the user owns
+      if(!card.owner || card.owner._id.equals(ctx.state.user._id)) {
+
+        // filter card to decks the user belongs to
+        card.decks = card.decks.reduce((newDecks, deck) => {
+          if(userHasDeck(deck)) {
+            newDecks.push(deck._id); 
+          }
+          return newDecks; 
+        }, []); 
+
+        if(card.decks.length) {
+          
+          card.notes = null; 
+          card.translations = null; 
+
+          newCards.push(card); 
+        }
+      }
+
+      return newCards; 
+    }, []) 
   },
 
   /**

@@ -1,0 +1,78 @@
+{
+  "connection": "default",
+  "info": {
+    "name": "user",
+    "description": ""
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "role": {
+      "model": "role",
+      "via": "users",
+      "plugin": "users-permissions",
+      "configurable": false
+    },
+    "classes": {
+      "collection": "class",
+      "via": "users",
+      "dominant": true
+    },
+    "decks": {
+      "collection": "deck",
+      "dominant": true,
+      "via": "users"
+    },
+    "notes": {
+      "collection": "note",
+      "dominant": true,
+      "via": "user"
+    },
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "owned_decks": {
+      "collection": "deck",
+      "dominant": true,
+      "via": "owner",
+      "columnName": "owned_decks"
+    },
+    "owned_cards": {
+      "collection": "card",
+      "dominant": true,
+      "via": "owner"
+    }
+  },
+  "collectionName": "users-permissions_user"
+}

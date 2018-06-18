@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Card` model.
+ * Lifecycle callbacks for the `Permission` model.
  */
 
 module.exports = {
@@ -19,9 +19,7 @@ module.exports = {
 
   // After fetching all values.
   // Fired after a `fetchAll` operation.
-  afterFetchAll: async (model, results) => {
-    
-  },
+  // afterFetchAll: async (model, results) => {},
 
   // Fired before a `fetch` operation.
   // beforeFetch: async (model) => {},
@@ -31,11 +29,11 @@ module.exports = {
   // afterFetch: async (model, result) => {},
 
   // Before creating a value.
-  // Fired before an `insert` query.
+  // Fired before `insert` query.
   // beforeCreate: async (model) => {},
 
   // After creating a value.
-  // Fired after an `insert` query.
+  // Fired after `insert` query.
   // afterCreate: async (model, result) => {},
 
   // Before updating a value.

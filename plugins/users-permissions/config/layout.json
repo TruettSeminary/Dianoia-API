@@ -1,0 +1,15 @@
+{
+  "user": {
+    "attributes": {
+      "first_name": {
+        "appearance": ""
+      },
+      "last_name": {
+        "appearance": ""
+      },
+      "phone_number": {
+        "appearance": ""
+      }
+    }
+  }
+}
