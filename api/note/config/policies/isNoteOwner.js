@@ -1,5 +1,7 @@
 module.exports = async (ctx, next) => {
 
+    // if(ctx.params.note_id) ctx.params._id = ctx.params.note_id; 
+
     const note = await strapi.services.note.fetch({
         "_id": ctx.params._id
     }); 

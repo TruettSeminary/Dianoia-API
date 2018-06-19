@@ -49,6 +49,9 @@ module.exports = {
    */
 
   create: async (ctx) => {
+    // only make a note for the current user
+    ctx.request.body.user = ctx.state.user; 
+
     return strapi.services.note.add(ctx.request.body);
   },
 

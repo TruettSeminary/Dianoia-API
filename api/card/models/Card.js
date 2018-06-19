@@ -19,9 +19,7 @@ module.exports = {
 
   // After fetching all values.
   // Fired after a `fetchAll` operation.
-  afterFetchAll: async (model, results) => {
-    
-  },
+  // afterFetchAll: async (model, results) => {},
 
   // Fired before a `fetch` operation.
   // beforeFetch: async (model) => {},

@@ -48,10 +48,18 @@ module.exports = {
    */
 
   add: async (values) => {
-    const query = await Note.create(_.omit(values, _.keys(_.groupBy(strapi.models.note.associations, 'alias'))));
+    const query = await Note.create(_.omit(values, _.keys(_.groupBy(strapi.models.note.associations, 'alias'))));    
     const data = query.toJSON ? query.toJSON() : query;
 
     await strapi.hook.mongoose.manageRelations('note', _.merge(data, { values }));
+
+    if(values.card) {
+      if(values.card._id) query.card = values.card._id; 
+      else query.card = card; 
+    }
+    else if(values.card_id) {
+      query.card = values.card_id; 
+    }
 
     return query;
   },
