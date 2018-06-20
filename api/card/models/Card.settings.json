@@ -15,7 +15,7 @@
     "back_text": {
       "type": "string"
     },
-    "devotional_thought": {
+    "devotional": {
       "type": "text"
     },
     "decks": {
@@ -36,13 +36,44 @@
       "collection": "translation",
       "via": "cards"
     },
-    "test_json": {
-      "type": "json"
-    },
     "owner": {
       "model": "user",
       "via": "owned_cards",
       "plugin": "users-permissions"
+    },
+    "part_of_speech": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "string"
+    },
+    "person": {
+      "type": "string"
+    },
+    "noted_scripture": {
+      "type": "string"
+    },
+    "video_link": {
+      "type": "string"
+    },
+    "pronunciation": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "number_of_occurances": {
+      "type": "integer"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "tense": {
+      "type": "string"
     }
   }
 }
