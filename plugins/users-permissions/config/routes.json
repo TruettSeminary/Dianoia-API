@@ -171,7 +171,7 @@
       "path": "/auth/local/register",
       "handler": "Auth.register",
       "config": {
-        "policies": [],
+        "policies": ["validRegistration"],
         "prefix": ""
       }
     },
