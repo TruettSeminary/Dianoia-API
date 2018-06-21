@@ -8,6 +8,16 @@
 
 module.exports = {
 
+
+  /**
+  * Count readings records.
+  *
+  * @return {Number}
+  */
+  count: async (ctx) => {
+    return strapi.services.readings.count(ctx.query);
+  },
+
   /**
    * Retrieve readings records.
    *

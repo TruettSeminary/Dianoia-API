@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/deck/count",
+      "handler": "Deck.count",
+      "config": {
+        "policies": []
+      }
+    },    
+    {
+      "method": "GET",
       "path": "/deck/:_id",
       "handler": "Deck.findOne",
       "config": {

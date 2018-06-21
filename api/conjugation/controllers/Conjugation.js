@@ -8,6 +8,16 @@
 
 module.exports = {
 
+    /**
+    * Count conjugation records.
+    *
+    * @return {Number}
+    */
+
+  count: async (ctx) => {
+    return strapi.services.conjugation.count(ctx.query);
+  },
+
   /**
    * Retrieve conjugation records.
    *

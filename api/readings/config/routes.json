@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/readings/count",
+      "handler": "Readings.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/readings/:_id",
       "handler": "Readings.findOne",
       "config": {

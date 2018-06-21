@@ -11,6 +11,14 @@
     },
     {
       "method": "GET",
+      "path": "/note/count",
+      "handler": "Note.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/note/:_id",
       "handler": "Note.findOne",
       "config": {

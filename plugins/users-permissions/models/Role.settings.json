@@ -22,7 +22,6 @@
     },
     "users": {
       "collection": "user",
-      "dominant": true,
       "via": "role",
       "plugin": "users-permissions"
     },

@@ -20,8 +20,10 @@
   },
   "dependencies": {
     "lodash": "4.x.x",
-    "strapi": "3.0.0-alpha.12.1.2",
-    "strapi-mongoose": "3.0.0-alpha.12.1.2"
+    "strapi": "3.0.0-alpha.12.5",
+    "strapi-email-mailgun": "3.0.0-alpha.12.5",
+    "strapi-email-sendgrid": "3.0.0-alpha.12.5",
+    "strapi-mongoose": "3.0.0-alpha.12.5"
   },
   "author": {
     "name": "austin",

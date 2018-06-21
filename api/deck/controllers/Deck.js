@@ -9,6 +9,16 @@
 module.exports = {
 
   /**
+  * Count deck records.
+  *
+  * @return {Number}
+  */
+
+  count: async (ctx) => {
+    return strapi.services.deck.count(ctx.query);
+  },
+
+  /**
    * Retrieve deck records.
    *
    * @return {Object|Array}

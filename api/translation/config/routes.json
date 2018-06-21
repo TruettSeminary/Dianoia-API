@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/translation/count",
+      "handler": "Translation.count",
+      "config": {
+        "policies": []
+      }
+    },    
+    {
+      "method": "GET",
       "path": "/translation/:_id",
       "handler": "Translation.findOne",
       "config": {

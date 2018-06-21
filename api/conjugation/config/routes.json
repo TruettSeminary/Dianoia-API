@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/conjugation/count",
+      "handler": "Conjugation.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/conjugation/:_id",
       "handler": "Conjugation.findOne",
       "config": {

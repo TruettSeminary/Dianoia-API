@@ -12,6 +12,21 @@ const _ = require('lodash');
 module.exports = {
 
   /**
+  * Promise to count articles.
+  *
+  * @return {Promise}
+  */
+
+  count: (params) => {
+    // Convert `params` object to filters compatible with Mongo.
+    const filters = strapi.utils.models.convertParams('note', params);
+
+    return Notes
+      .count()
+      .where(filters.where);
+  },
+
+  /**
    * Promise to fetch all notes.
    *
    * @return {Promise}
@@ -48,20 +63,24 @@ module.exports = {
    */
 
   add: async (values) => {
-    const query = await Note.create(_.omit(values, _.keys(_.groupBy(strapi.models.note.associations, 'alias'))));    
-    const data = query.toJSON ? query.toJSON() : query;
+    // Extract values related to relational data.
+    const relations = _.pick(values, Note.associations.map(ast => ast.alias));
+    const data = _.omit(values, Note.associations.map(ast => ast.alias));
 
-    await strapi.hook.mongoose.manageRelations('note', _.merge(data, { values }));
+    // Create entry with no-relational data.
+    const entry = await Note.create(data);
 
-    if(values.card) {
-      if(values.card._id) query.card = values.card._id; 
-      else query.card = card; 
+    // Create relational data and return the entry.
+    const newNote =  Note.updateRelations({ id: entry.id, values: relations });
+    if(values.card && !newNote.card) {
+      if(values.card._id) newNote.card = values.card._id; 
+      else newNote.card = card; 
     }
-    else if(values.card_id) {
-      query.card = values.card_id; 
+    else if(values.card_id && !newNote.card) {
+      newNote.card = values.card_id; 
     }
 
-    return query;
+    return newNote;
   },
 
   /**
@@ -69,13 +88,25 @@ module.exports = {
    *
    * @return {Promise}
    */
-
   edit: async (params, values) => {
-    // Note: The current method will return the full response of Mongo.
-    // To get the updated object, you have to execute the `findOne()` method
-    // or use the `findOneOrUpdate()` method with `{ new:true }` option.
-    await strapi.hook.mongoose.manageRelations('note', _.merge(_.clone(params), { values })); 
-    return Note.findOneAndUpdate(params, values, { multi: true, new: true });
+    // Extract values related to relational data.
+    const relations = _.pick(values, Note.associations.map(a => a.alias));
+    const data = _.omit(values, Note.associations.map(a => a.alias));
+  
+    // Update entry with no-relational data.
+    const entry = await Note.update(params, data, { multi: true });
+  
+    // Update relational data and return the entry.
+    const newNote = await Note.updateRelations(Object.assign(params, { values: relations }));
+    if(newNote.user && newNote.user._id) {
+      newNote.user = newNote.user._id; 
+    } 
+
+    if(newNote.card && newNote.card._id) {
+      newNote.card = newNote.card._id
+    }
+
+    return newNote; 
   },
 
   /**
@@ -83,23 +114,37 @@ module.exports = {
    *
    * @return {Promise}
    */
-
   remove: async params => {
+    // Select field to populate.
+    const populate = Note.associations
+      .filter(ast => ast.autoPopulate !== false)
+      .map(ast => ast.alias)
+      .join(' ');
+  
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Note.findOneAndRemove(params, {})
-      .populate(_.keys(_.groupBy(_.reject(strapi.models.note.associations, {autoPopulate: false}), 'alias')).join(' '));
-
-    _.forEach(Note.associations, async association => {
-      const search = (_.endsWith(association.nature, 'One')) ? { [association.via]: data._id } : { [association.via]: { $in: [data._id] } };
-      const update = (_.endsWith(association.nature, 'One')) ? { [association.via]: null } : { $pull: { [association.via]: data._id } };
-
-      await strapi.models[association.model || association.collection].update(
-        search,
-        update,
-        { multi: true });
-    });
-
+    const data = await Note
+      .findOneAndRemove(params, {})
+      .populate(populate);
+  
+    if (!data) {
+      return data;
+    }
+  
+    await Promise.all(
+      Note.associations.map(async association => {
+        const search = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: data._id } : { [association.via]: { $in: [data._id] } };
+        const update = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: null } : { $pull: { [association.via]: data._id } };
+  
+        // Retrieve model.
+        const model = association.plugin ?
+          strapi.plugins[association.plugin].models[association.model || association.collection] :
+          strapi.models[association.model || association.collection];
+  
+        return model.update(search, update, { multi: true });
+      })
+    );
+  
     return data;
   }
 };

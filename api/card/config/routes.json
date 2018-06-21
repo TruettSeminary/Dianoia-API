@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/card/count",
+      "handler": "Card.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/card/:_id",
       "handler": "Card.findOne",
       "config": {

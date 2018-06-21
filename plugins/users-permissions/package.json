@@ -1,8 +1,8 @@
 {
   "_from": "strapi-plugin-users-permissions@alpha",
-  "_id": "strapi-plugin-users-permissions@3.0.0-alpha.12.1.2",
+  "_id": "strapi-plugin-users-permissions@3.0.0-alpha.12.5",
   "_inBundle": false,
-  "_integrity": "sha512-ggFK9ac0sgu34E1L4WxBkSUNQieGWJWQe/dtNkQnDFaUIyD2oIKdW8IsqMFTN2N1fTY9VeAg+FwFDoSKDJqomw==",
+  "_integrity": "sha512-ZSS7vf/BXgDHXTpLUjkb8aLCALKRvi5DvjrMhXuiNfTlEivpcwYrHlCZn/fJRUllt0QsXFDhAKkXTJZCawOQdA==",
   "_location": "/strapi-plugin-users-permissions",
   "_phantomChildren": {},
   "_requested": {
@@ -18,10 +18,10 @@
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/strapi-plugin-users-permissions/-/strapi-plugin-users-permissions-3.0.0-alpha.12.1.2.tgz",
-  "_shasum": "1d8262835a00df2eea3f279d61ee3c092541fae2",
+  "_resolved": "https://registry.npmjs.org/strapi-plugin-users-permissions/-/strapi-plugin-users-permissions-3.0.0-alpha.12.5.tgz",
+  "_shasum": "157b18347a6ae1e30e332f4952382205cfadc428",
   "_spec": "strapi-plugin-users-permissions@alpha",
-  "_where": "/Users/austin/Development/Projects/greek/dianoia-api",
+  "_where": "/Users/austin/Development/Playground/strapi-3.12.5.0",
   "author": {
     "name": "Strapi team",
     "email": "hi@strapi.io",
@@ -43,7 +43,7 @@
   "deprecated": false,
   "description": "Protect your API with a full-authentication process based on JWT",
   "devDependencies": {
-    "strapi-helper-plugin": "3.0.0-alpha.12.1.2"
+    "strapi-helper-plugin": "3.0.0-alpha.12.5"
   },
   "engines": {
     "node": ">= 9.0.0",
@@ -70,18 +70,17 @@
     "build:clean": "node ./node_modules/strapi-helper-plugin/node_modules/.bin/rimraf admin/build",
     "build:dev": "node ./node_modules/strapi-helper-plugin/node_modules/.bin/cross-env NODE_ENV=development node ./node_modules/strapi-helper-plugin/node_modules/.bin/webpack --config node_modules/strapi-helper-plugin/lib/internals/webpack/webpack.prod.babel.js --color -p --progress",
     "generate": "node ./node_modules/plop/plop.js --plopfile node_modules/strapi-helper-plugin/lib/internals/generators/index.js",
-    "lint": "node ./node_modules/strapi-helper-plugin/node_modules/.bin/eslint --ignore-path .gitignore --ignore-pattern '/admin/build/' --config ./node_modules/strapi-helper-plugin/lib/internals/eslint/.eslintrc.json admin",
     "preanalyze": "npm run analyze:clean",
     "prebuild": "npm run build:clean",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "IS_MONOREPO=true npm run build",
     "prettier": "node ./node_modules/strapi-helper-plugin/node_modules/.bin/prettier --single-quote --trailing-comma es5 --write \"{admin,__{tests,mocks}__}/**/*.js\"",
     "start": "node ./node_modules/strapi-helper-plugin/node_modules/.bin/cross-env NODE_ENV=development node ./node_modules/strapi-helper-plugin/lib/server",
-    "test": "npm run lint"
+    "test": "echo \"Error: no test specified\""
   },
   "strapi": {
     "name": "Roles & Permissions",
     "icon": "users",
     "description": "users-permissions.plugin.description"
   },
-  "version": "3.0.0-alpha.12.1.2"
+  "version": "3.0.0-alpha.12.5"
 }
