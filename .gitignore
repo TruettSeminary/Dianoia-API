@@ -106,24 +106,26 @@ coverage
 ############################
 # Config
 ############################
-config/environments/**/database.json
-config/environments/**/request.json
-config/environments/**/security.json
+config/environments/**/*.json
+# config/environments/**/database.json
+# config/environments/**/request.json
+# config/environments/**/security.json
 
 ############################
-# Strapi Boilerplate
-############################
-admin
+# # Strapi Boilerplate
+# ############################
+# admin
 
-plugins/analytics/
-plugins/content-manager/
-plugins/content-type-builder/
-plugins/email/
-plugins/settings-manager/
-plugins/upload/
+# plugins/analytics/
+# plugins/content-manager/
+# plugins/content-type-builder/
+# plugins/email/
+# plugins/settings-manager/
+# plugins/upload/
 
-plugins/users-permissions/README.md
-plugins/users-permissions/.npmignore
-plugins/users-permissions/.gitignore
-plugins/users-permissions/.gitattributes
-plugins/users-permissions/.editorconfig
+# plugins/users-permissions/README.md
+# plugins/users-permissions/.npmignore
+# plugins/users-permissions/.gitignore
+# plugins/users-permissions/.gitattributes
+# plugins/users-permissions/.editorconfig
+.vscode/sftp.json
