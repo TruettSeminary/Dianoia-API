@@ -120,6 +120,9 @@ module.exports = {
       // Update the user.
       await strapi.query('user', 'users-permissions').update(data);
 
+      // Modify User model to only return deck values; 
+      user.decks = user.decks.map((deck) => deck._id); 
+
       ctx.send({
         jwt: strapi.plugins['users-permissions'].services.jwt.issue(_.pick(user.toJSON ? user.toJSON() : user, ['_id', 'id'])),
         user: _.omit(user.toJSON ? user.toJSON() : user, ['password', 'resetPasswordToken'])
