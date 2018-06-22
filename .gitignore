@@ -106,10 +106,7 @@ coverage
 ############################
 # Config
 ############################
-config/environments/**/*.json
-# config/environments/**/database.json
-# config/environments/**/request.json
-# config/environments/**/security.json
+config/environments/
 
 ############################
 # # Strapi Boilerplate
@@ -129,3 +126,5 @@ config/environments/**/*.json
 # plugins/users-permissions/.gitattributes
 # plugins/users-permissions/.editorconfig
 .vscode/sftp.json
+config/environments/production/server.json
+copy-config.sh
