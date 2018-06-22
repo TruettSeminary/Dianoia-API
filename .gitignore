@@ -126,5 +126,5 @@ config/environments/
 # plugins/users-permissions/.gitattributes
 # plugins/users-permissions/.editorconfig
 .vscode/sftp.json
-config/environments/production/server.json
+config/environments/
 copy-config.sh
