@@ -80,7 +80,7 @@ $RECYCLE.BIN/
 ssl
 .idea
 nbproject
-
+.vscode/sftp.json
 
 ############################
 # Node.js
@@ -107,24 +107,7 @@ coverage
 # Config
 ############################
 config/environments/
+permissions/
 
-############################
-# # Strapi Boilerplate
-# ############################
-# admin
-
-# plugins/analytics/
-# plugins/content-manager/
-# plugins/content-type-builder/
-# plugins/email/
-# plugins/settings-manager/
-# plugins/upload/
-
-# plugins/users-permissions/README.md
-# plugins/users-permissions/.npmignore
-# plugins/users-permissions/.gitignore
-# plugins/users-permissions/.gitattributes
-# plugins/users-permissions/.editorconfig
-.vscode/sftp.json
-config/environments/
 copy-config.sh
+export-permissions.sh
