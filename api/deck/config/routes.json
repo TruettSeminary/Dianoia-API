@@ -15,13 +15,15 @@
       "config": {
         "policies": []
       }
-    },    
+    },
     {
       "method": "GET",
       "path": "/deck/:_id",
       "handler": "Deck.findOne",
       "config": {
-        "policies": ["allowedToViewDeck"]
+        "policies": [
+          "allowedToViewDeck"
+        ]
       }
     },
     {
@@ -45,7 +47,9 @@
       "path": "/deck/:_id",
       "handler": "Deck.destroy",
       "config": {
-        "policies": ["isDeckOwner"]
+        "policies": [
+          "isDeckOwner"
+        ]
       }
     }
   ]

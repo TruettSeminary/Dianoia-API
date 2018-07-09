@@ -15,7 +15,7 @@
       "config": {
         "policies": []
       }
-    },    
+    },
     {
       "method": "GET",
       "path": "/translation/:_id",
