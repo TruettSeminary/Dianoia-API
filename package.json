@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
+    "csvtojson": "2.0.4",
     "eslint": "^3.12.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -20,10 +21,11 @@
   },
   "dependencies": {
     "lodash": "4.x.x",
-    "strapi": "3.0.0-alpha.12.5",
-    "strapi-email-mailgun": "3.0.0-alpha.12.5",
-    "strapi-email-sendgrid": "3.0.0-alpha.12.5",
-    "strapi-mongoose": "3.0.0-alpha.12.5"
+    "strapi": "3.0.0-alpha.12.6",
+    "strapi-email-mailgun": "3.0.0-alpha.12.6",
+    "strapi-email-sendgrid": "3.0.0-alpha.12.6",
+    "strapi-mongoose": "3.0.0-alpha.12.6",
+    "strapi-upload-aws-s3": "3.0.0-alpha.12.6"
   },
   "author": {
     "name": "austin",

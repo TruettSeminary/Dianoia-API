@@ -5,7 +5,7 @@
       "path": "/note",
       "handler": "Note.find",
       "config": {
-        "policies": [], 
+        "policies": [],
         "myConfig": true
       }
     },
@@ -22,7 +22,9 @@
       "path": "/note/:_id",
       "handler": "Note.findOne",
       "config": {
-        "policies": ["isNoteOwner"]
+        "policies": [
+          "isNoteOwner"
+        ]
       }
     },
     {
@@ -30,7 +32,9 @@
       "path": "/note",
       "handler": "Note.create",
       "config": {
-        "policies": ["validateNewNote"]
+        "policies": [
+          "validateNewNote"
+        ]
       }
     },
     {
@@ -38,7 +42,9 @@
       "path": "/note/:_id",
       "handler": "Note.update",
       "config": {
-        "policies": ["isNoteOwner"]
+        "policies": [
+          "isNoteOwner"
+        ]
       }
     },
     {

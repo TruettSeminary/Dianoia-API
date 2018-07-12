@@ -111,3 +111,4 @@ permissions/
 
 copy-config.sh
 export-permissions.sh
+bulk_upload.js
