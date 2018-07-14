@@ -79,7 +79,7 @@ module.exports = {
     const entry = await Card.create(data);
   
     // Create relational data and return the entry.
-    return Card.updateRelations({ id: entry.id, values: relations });
+    return Card.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
@@ -97,7 +97,8 @@ module.exports = {
     const entry = await Card.update(params, data, { multi: true });
   
     // Update relational data and return the entry.
-    return Card.updateRelations(Object.assign(params, { values: relations }));
+    const updateData = Object.assign(params, { values: relations }); 
+    return Card.updateRelations(updateData);
   },
   
 

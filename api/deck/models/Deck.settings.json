@@ -21,7 +21,6 @@
     },
     "cards": {
       "collection": "card",
-      "dominant": true,
       "via": "decks"
     },
     "users": {

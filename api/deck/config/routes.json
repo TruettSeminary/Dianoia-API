@@ -35,6 +35,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/deck/findoneorcreate",
+      "handler": "Deck.findOneOrCreate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/deck/:_id",
       "handler": "Deck.update",

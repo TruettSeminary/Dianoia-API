@@ -102,5 +102,51 @@ module.exports = {
 
   destroy: async (ctx, next) => {
     return strapi.services.card.remove(ctx.params);
+  },
+
+  /**
+   * Bulk create cards
+   * 
+   * @return {Object}
+   */
+  bulkCreate: async (ctx) => {
+    // if file is csv, convert to json
+
+    const importedCards = ctx.request.body.data; 
+    
+    if(ctx.request.body.type !== 'json') {
+      return ctx.response.notAcceptable('Data for bulk upload must be JSON'); 
+    }
+
+    // find all decks that need to be created
+    const deckNames = importedCards.reduce((deckNames, card) => {
+
+      card.decks.forEach((cardDeck) => {
+        if(!deckNames.includes(cardDeck)) deckNames.push(cardDeck); 
+      }); 
+
+      return deckNames; 
+    }, []); 
+
+    const deckMap = (await Promise.all(deckNames.map((deckName) => {
+      return strapi.services.deck.fetchOrAdd({
+        name: deckName
+      }); 
+    }))).reduce((decks, deck) => {
+      decks[deck.name] = deck.id; // string id
+      return decks; 
+    }, {});
+
+    const cards = await Promise.all(importedCards.map((card) => {
+      const decks = card.decks.map((deckName) => {
+        return deckMap[deckName];
+      });
+      return strapi.services.card.add({
+        ...card, 
+        decks
+      })
+    })); 
+
+    return cards; 
   }
 };

@@ -48,6 +48,13 @@ module.exports = {
     return strapi.services.deck.fetch(ctx.params);
   },
 
+  findOneOrCreate: async(ctx) => {
+    const deck = await strapi.services.deck.fetchOrAdd(ctx.request.body); 
+    if(deck) return deck; 
+    
+    return ctx.response.notAcceptable('A name or id is required for this method'); 
+  },
+
   /**
    * Create a/an deck record.
    *

@@ -57,6 +57,22 @@ module.exports = {
       .populate(_.keys(_.groupBy(_.reject(strapi.models.deck.associations, {autoPopulate: false}), 'alias')).join(' '));
   },
 
+  fetchOrAdd: async(values) => {
+    if(values._id) {
+      return await strapi.services.deck.fetch(values); 
+    }
+    else if(values.name) {
+      let decks = await strapi.services.deck.fetchAll(values); 
+      
+      // Deck with name exists
+      if(decks.length) return decks[0]; 
+
+      // Deck with name does not exist --> create it
+      else return await strapi.services.deck.add(values);
+    }
+    else return null; 
+  },
+
   /**
    * Promise to add a/an deck.
    *

@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/card/bulk",
+      "handler": "Card.bulkCreate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/card/:_id",
       "handler": "Card.update",
