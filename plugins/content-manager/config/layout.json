@@ -1,1 +1,9 @@
-{}
+{
+  "card": {
+    "attributes": {
+      "devotional": {
+        "appearance": "WYSIWYG"
+      }
+    }
+  }
+}

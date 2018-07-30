@@ -70,7 +70,6 @@
     },
     "owned_cards": {
       "collection": "card",
-      "dominant": true,
       "via": "owner"
     }
   },
