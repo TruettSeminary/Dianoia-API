@@ -75,12 +75,23 @@ module.exports = {
     return strapi.services.note.edit(ctx.params, ctx.request.body) ;
   },
 
+  createOrUpdate: async(ctx) => {
+
+    if(ctx.request.body._id) {
+      const params = {
+        _id: ctx.request.body._id
+      }
+      
+      return strapi.services.note.edit(params, ctx.request.body);
+    }
+    else return strapi.services.note.add(ctx.request.body); 
+  },
+
   /**
    * Destroy a/an note record.
    *
    * @return {Object}
    */
-
   destroy: async (ctx, next) => {
 
     // Make sure only the card owner is destorying the card
