@@ -70,7 +70,7 @@ module.exports = {
     const entry = await Conjugation.create(data);
   
     // Create relational data and return the entry.
-    return Conjugation.updateRelations({ id: entry.id, values: relations });
+    return Conjugation.updateRelations({ _id: entry.id, values: relations });
   },
   /**
    * Promise to edit a/an conjugation.

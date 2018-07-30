@@ -70,7 +70,7 @@ module.exports = {
     const entry = await Readings.create(data);
   
     // Create relational data and return the entry.
-    return Readings.updateRelations({ id: entry.id, values: relations });
+    return Readings.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**

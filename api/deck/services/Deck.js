@@ -87,7 +87,7 @@ module.exports = {
     const entry = await Deck.create(data);
   
     // Create relational data and return the entry.
-    return Deck.updateRelations({ id: entry.id, values: relations });
+    return Deck.updateRelations({ _id: entry.id, values: relations });
   },
   /**
    * Promise to edit a/an deck.

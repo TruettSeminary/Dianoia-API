@@ -69,7 +69,7 @@ module.exports = {
     const entry = await Class.create(data);
   
     // Create relational data and return the entry.
-    return Class.updateRelations({ id: entry.id, values: relations });
+    return Class.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**

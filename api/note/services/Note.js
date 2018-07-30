@@ -71,7 +71,8 @@ module.exports = {
     const entry = await Note.create(data);
 
     // Create relational data and return the entry.
-    const newNote =  Note.updateRelations({ id: entry.id, values: relations });
+    const newNote =  Note.updateRelations({ _id: entry.id, values: relations });
+    
     if(values.card && !newNote.card) {
       if(values.card._id) newNote.card = values.card._id; 
       else newNote.card = card; 
