@@ -112,9 +112,21 @@ module.exports = {
   bulkCreate: async (ctx) => {
     // if file is csv, convert to json
 
-    const importedCards = ctx.request.body.data; 
-    
-    if(ctx.request.body.type !== 'json') {
+    let importedCards; 
+    if(ctx.request.body.type === 'json') {
+      importedCards = ctx.request.body.data; 
+    }
+    else if(ctx.request.body.type === 'csv') {
+      importedCards = (await strapi.apiUtils.readCSV(ctx.request.body.data)).map((card) => {
+        return {
+          ...card, 
+          decks: card.decks.split(';').map((deck) => deck.trim())
+        }
+      });
+      
+    }
+    else {
+      // Data is neither csv or json, so we can't work with it
       return ctx.response.notAcceptable('Data for bulk upload must be JSON'); 
     }
 

@@ -20,8 +20,8 @@
     },
     "decks": {
       "collection": "deck",
-      "dominant": true,
-      "via": "cards"
+      "via": "cards",
+      "dominant": true
     },
     "notes": {
       "collection": "note",
