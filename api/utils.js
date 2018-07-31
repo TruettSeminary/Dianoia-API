@@ -11,5 +11,13 @@ module.exports = {
     }, 
     readCSV: async(data) => {
         return csv().fromString(data); 
+    }, 
+
+    // assumes data is an array of objects with object id; 
+    // returns an array of the ids; 
+    stripData: (data) => {
+        return data.map((obj) => {
+            return obj._id; 
+        }); 
     }
 };

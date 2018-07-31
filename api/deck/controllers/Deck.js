@@ -24,14 +24,20 @@ module.exports = {
    * @return {Object|Array}
    */
   find: async (ctx) => {
-    let decks = await strapi.services.deck.fetchAll(ctx.query)
+    const  allDecks = await strapi.services.deck.fetchAll(ctx.query)
 
-    // TODO monitor this query as once the number of decks grows too larger it might be a bit harder
-    return decks.filter((deck)=>{
-      if(!deck.owner) return true; 
-      if(deck.owner._id.equals(ctx.state.user._id)) return true; 
-      return false; 
-    });
+    // TODO: monitor this query as once the number of decks grows too larger it might be a bit harder
+    return allDecks.reduce((decks, deck)=>{
+      if(!deck.owner || deck.owner._id.equals(ctx.state.user._id)) {
+        deck.users = null; 
+        deck.cards = strapi.apiUtils.stripData(deck.cards); 
+        deck.classes = strapi.apiUtils.stripData(deck.classes); 
+
+        decks.push(deck); 
+      }
+
+      return decks; 
+    }, []);
   },
 
   /**

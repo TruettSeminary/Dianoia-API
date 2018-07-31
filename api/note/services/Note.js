@@ -88,16 +88,7 @@ module.exports = {
     const entry = await Note.update(params, data, { multi: true });
   
     // Update relational data and return the entry.
-    const newNote = await Note.updateRelations(Object.assign(params, { values: relations }));
-    if(newNote.user && newNote.user._id) {
-      newNote.user = newNote.user._id; 
-    } 
-
-    if(newNote.card && newNote.card._id) {
-      newNote.card = newNote.card._id
-    }
-
-    return newNote; 
+    return Note.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**

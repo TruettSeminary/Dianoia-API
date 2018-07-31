@@ -62,7 +62,17 @@ module.exports = {
     // only make a note for the current user
     ctx.request.body.user = ctx.state.user; 
 
-    return strapi.services.note.add(ctx.request.body);
+    const newNote = await strapi.services.note.add(ctx.request.body);
+
+    if(newNote.user && newNote.user._id) {
+      newNote.user = newNote.user._id; 
+    } 
+
+    if(newNote.card && newNote.card._id) {
+      newNote.card = newNote.card._id
+    }
+
+    return newNote; 
   },
 
   /**
@@ -72,19 +82,39 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.note.edit(ctx.params, ctx.request.body) ;
+    const newNote = strapi.services.note.edit(ctx.params, ctx.request.body);
+
+    if(newNote.user && newNote.user._id) {
+      newNote.user = newNote.user._id; 
+    } 
+
+    if(newNote.card && newNote.card._id) {
+      newNote.card = newNote.card._id
+    }
+
+    return newNote; 
   },
 
   createOrUpdate: async(ctx) => {
-
+    let newNote; 
     if(ctx.request.body._id) {
       const params = {
         _id: ctx.request.body._id
       }
       
-      return strapi.services.note.edit(params, ctx.request.body);
+      newNote = await strapi.services.note.edit(params, ctx.request.body);
     }
-    else return strapi.services.note.add(ctx.request.body); 
+    else newNote = await strapi.services.note.add(ctx.request.body); 
+
+    if(newNote.user && newNote.user._id) {
+      newNote.user = newNote.user._id; 
+    } 
+
+    if(newNote.card && newNote.card._id) {
+      newNote.card = newNote.card._id
+    }
+
+    return newNote; 
   },
 
   /**
