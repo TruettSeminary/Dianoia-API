@@ -25,7 +25,14 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    return strapi.services.translation.fetchAll(ctx.query);
+    const translations = await strapi.services.translation.fetchAll(ctx.query);
+
+    return translations.reduce((translations, translation) => {
+      translation.decks = strapi.apiUtils.stripData(translation.decks);
+      translations.push(translation); 
+      
+      return translations; 
+    }, []); 
   },
 
   /**
@@ -49,7 +56,11 @@ module.exports = {
    */
 
   create: async (ctx) => {
-    return strapi.services.translation.add(ctx.request.body);
+    const translation =  strapi.services.translation.add(ctx.request.body);
+
+    translation.decks = strapi.apiUtils.stripData(translation.decks); 
+
+    return translation; 
   },
 
   /**

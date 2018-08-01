@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Conjugation` model.
+ * Lifecycle callbacks for the `Adminapi` model.
  */
 
 module.exports = {

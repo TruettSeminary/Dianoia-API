@@ -33,6 +33,10 @@
       "model": "user",
       "via": "owned_decks",
       "plugin": "users-permissions"
+    },
+    "translations": {
+      "collection": "translation",
+      "via": "decks"
     }
   }
 }

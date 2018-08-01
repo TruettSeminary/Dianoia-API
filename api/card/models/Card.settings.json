@@ -28,15 +28,6 @@
       "via": "card",
       "dominant": true
     },
-    "conjugations": {
-      "collection": "conjugation",
-      "via": "card",
-      "dominant": true
-    },
-    "translations": {
-      "collection": "translation",
-      "via": "cards"
-    },
     "owner": {
       "model": "user",
       "via": "owned_cards",
