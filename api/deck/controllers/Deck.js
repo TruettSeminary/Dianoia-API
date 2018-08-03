@@ -32,7 +32,8 @@ module.exports = {
         deck.users = null; 
         deck.cards = strapi.apiUtils.stripData(deck.cards); 
         deck.classes = strapi.apiUtils.stripData(deck.classes); 
-
+        deck.translations = strapi.apiUtils.stripData(deck.translations); 
+        
         decks.push(deck); 
       }
 
