@@ -5,7 +5,9 @@
       "path": "/adminapi/card",
       "handler": "Adminapi.findCard",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     },
     {
@@ -13,7 +15,9 @@
       "path": "/adminapi/deck",
       "handler": "Adminapi.findDeck",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     },
     {
@@ -21,7 +25,9 @@
       "path": "/adminapi/translation",
       "handler": "Adminapi.findTranslation",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     },
     {
@@ -29,7 +35,9 @@
       "path": "/adminapi/translation",
       "handler": "Adminapi.createTranslation",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     },
     {
@@ -37,7 +45,9 @@
       "path": "/adminapi/translation/:_id",
       "handler": "Adminapi.updateTranslation",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     },
     {
@@ -45,7 +55,9 @@
       "path": "/adminapi/translation/:_id",
       "handler": "Adminapi.destroyTranslation",
       "config": {
-        "policies": []
+        "policies": [
+          "isAdmin"
+        ]
       }
     }
   ]
