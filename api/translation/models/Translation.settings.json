@@ -1,0 +1,34 @@
+{
+  "connection": "default",
+  "collectionName": "translation",
+  "info": {
+    "name": "translation",
+    "description": "Sentences to practice translation. "
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "sentence": {
+      "type": "string",
+      "required": true
+    },
+    "scripture": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "text"
+    },
+    "decks": {
+      "collection": "deck",
+      "via": "translations",
+      "dominant": true
+    },
+    "metadata": {
+      "type": "json"
+    }
+  }
+}

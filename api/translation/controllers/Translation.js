@@ -9,30 +9,17 @@
 module.exports = {
 
   /**
-  * Count translation records.
-  *
-  * @return {Number}
-  */
-
-  count: async (ctx) => {
-    return strapi.services.translation.count(ctx.query);
-  },
-
-  /**
    * Retrieve translation records.
    *
    * @return {Object|Array}
    */
 
   find: async (ctx) => {
-    const translations = await strapi.services.translation.fetchAll(ctx.query);
-
-    return translations.reduce((translations, translation) => {
-      translation.decks = strapi.apiUtils.stripData(translation.decks);
-      translations.push(translation); 
-      
-      return translations; 
-    }, []); 
+    if (ctx.query._q) {
+      return strapi.services.translation.search(ctx.query);
+    } else {
+      return strapi.services.translation.fetchAll(ctx.query);
+    }
   },
 
   /**
@@ -50,17 +37,23 @@ module.exports = {
   },
 
   /**
+   * Count translation records.
+   *
+   * @return {Number}
+   */
+
+  count: async (ctx) => {
+    return strapi.services.translation.count(ctx.query);
+  },
+
+  /**
    * Create a/an translation record.
    *
    * @return {Object}
    */
 
   create: async (ctx) => {
-    const translation =  strapi.services.translation.add(ctx.request.body);
-
-    translation.decks = strapi.apiUtils.stripData(translation.decks); 
-
-    return translation; 
+    return strapi.services.translation.add(ctx.request.body);
   },
 
   /**
