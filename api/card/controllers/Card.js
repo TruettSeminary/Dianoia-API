@@ -26,38 +26,84 @@ module.exports = {
 
   find: async (ctx) => {
     // TODO: watch this for performance issues (is there a way to do the filtering in mongo?)
-    const cards = await strapi.services.card.fetchAll(ctx.query);
 
-    const userHasDeck = (deck) => {
-      return ctx.state.user.decks.reduce((curVal, userDeck) => {
-        return curVal || userDeck._id.equals(deck._id); 
-      }, false);
-    }; 
+    const [cards, decks] = await Promise.all([
+      strapi.services.card.fetchAll(ctx.query), 
+      strapi.services.deck.fetchAll({})
+    ]); 
 
-    return cards.reduce((newCards, card) => {
+    // format cards for easier access
+    const cardMap = new Map(cards.map((card) => [card._id.toString(), card])); 
+    const deckMap = new Map(decks.map((deck) => [deck._id.toString(), deck])); 
 
-      // filter cards that the user owns
-      if(!card.owner || card.owner._id.equals(ctx.state.user._id)) {
 
-        // filter card to decks the user belongs to
-        card.decks = card.decks.reduce((newDecks, deck) => {
-          if(userHasDeck(deck)) {
-            newDecks.push(deck._id); 
-          }
-          return newDecks; 
-        }, []); 
+    const userCards = new Set(ctx.state.user.owned_cards.map(card => card._id)); 
+    const userDecks = new Set(); 
 
-        if(card.decks.length) {
-          
-          card.notes = null; 
-          card.translations = null; 
+    // get all the decks the user has
+    ctx.state.user.decks.forEach((unpopulatedDeck) => {
+      const deck = deckMap.get(unpopulatedDeck._id.toString()); 
 
-          newCards.push(card); 
+      // save the deck for reference
+      userDecks.add(deck._id.toString()); 
+
+      deck.cards.forEach((card) => userCards.add(card._id.toString()));
+      
+      deck.translations && deck.translations.forEach((translation) => {
+        translation.cards.forEach((card) => userCards.add(card._id.toString())); 
+      })
+    });
+
+    return Array.from(userCards).map((card_id) => {
+      const card = cardMap.get(card_id); 
+
+      // filter to decks user has access to
+      card.decks = card.decks.reduce((newDecks, deck) => {
+        if(userDecks.has(deck._id.toString())) {
+          newDecks.push(deck._id.toString()); 
         }
-      }
+        return newDecks; 
+      }, []); 
 
-      return newCards; 
-    }, []) 
+      // remove notes and translations
+      card.notes = null; 
+      card.translations = null;
+
+
+      return card; 
+    }); 
+      
+
+    // const userHasDeck = (deck) => {
+    //   return ctx.state.user.decks.reduce((curVal, userDeck) => {
+    //     return curVal || userDeck._id.equals(deck._id); 
+    //   }, false);
+    // }; 
+
+    // return cards.reduce((newCards, card) => {
+
+    //   // filter cards that the user owns
+    //   if(!card.owner || card.owner._id.equals(ctx.state.user._id)) {
+
+    //     // filter card to decks the user belongs to
+    //     card.decks = card.decks.reduce((newDecks, deck) => {
+    //       if(userHasDeck(deck)) {
+    //         newDecks.push(deck._id); 
+    //       }
+    //       return newDecks; 
+    //     }, []); 
+
+    //     if(card.decks.length) {
+          
+    //       card.notes = null; 
+    //       card.translations = null; 
+
+    //       newCards.push(card); 
+    //     }
+    //   }
+
+    //   return newCards; 
+    // }, []) 
   },
 
   /**

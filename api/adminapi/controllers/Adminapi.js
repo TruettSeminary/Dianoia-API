@@ -10,11 +10,17 @@ module.exports = {
 
 
   findCard: async (ctx) => {
-    return strapi.services.card.fetchAll(ctx.query); 
+    const cards = await strapi.services.card.fetchAll(ctx.query); 
+
+    // filter cards not owned by an individual user
+    return cards.filter(card => !card.owner); 
   },
 
   findDeck: async (ctx) => {
-    return strapi.services.deck.fetchAll(ctx.query); 
+    const decks =  await strapi.services.deck.fetchAll(ctx.query); 
+
+    // filter decks not owned by an individual user
+    return decks.filter(deck => !deck.owner); 
   },
 
 

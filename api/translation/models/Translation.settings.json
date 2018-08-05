@@ -29,6 +29,11 @@
     },
     "metadata": {
       "type": "json"
+    },
+    "cards": {
+      "collection": "card",
+      "via": "translations",
+      "dominant": true
     }
   }
 }

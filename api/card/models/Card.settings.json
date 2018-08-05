@@ -66,6 +66,10 @@
     },
     "tense": {
       "type": "string"
+    },
+    "translations": {
+      "collection": "translation",
+      "via": "cards"
     }
   }
 }
