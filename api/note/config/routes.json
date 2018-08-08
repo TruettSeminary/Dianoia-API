@@ -48,6 +48,16 @@
       }
     },
     {
+      "method": "PATCH",
+      "path": "/note",
+      "handler": "Note.createOrUpdate",
+      "config": {
+        "policies": [
+          "validatePatchNote"
+        ]
+      }
+    },
+    {
       "method": "DELETE",
       "path": "/note/:_id",
       "handler": "Note.destroy",

@@ -1,1 +1,25 @@
-{}
+{
+  "card": {
+    "attributes": {
+      "devotional": {
+        "appearance": "WYSIWYG"
+      }
+    }
+  },
+  "translation": {
+    "attributes": {
+      "scripture": {
+        "appearance": ""
+      },
+      "name": {
+        "appearance": ""
+      },
+      "instructions": {
+        "appearance": ""
+      },
+      "metadata": {
+        "appearance": ""
+      }
+    }
+  }
+}

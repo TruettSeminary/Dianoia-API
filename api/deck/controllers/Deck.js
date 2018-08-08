@@ -24,14 +24,21 @@ module.exports = {
    * @return {Object|Array}
    */
   find: async (ctx) => {
-    let decks = await strapi.services.deck.fetchAll(ctx.query)
+    const  allDecks = await strapi.services.deck.fetchAll(ctx.query)
 
-    // TODO monitor this query as once the number of decks grows too larger it might be a bit harder
-    return decks.filter((deck)=>{
-      if(!deck.owner) return true; 
-      if(deck.owner._id.equals(ctx.state.user._id)) return true; 
-      return false; 
-    });
+    // TODO: monitor this query as once the number of decks grows too larger it might be a bit harder
+    return allDecks.reduce((decks, deck)=>{
+      if(!deck.owner || deck.owner._id.equals(ctx.state.user._id)) {
+        deck.users = null; 
+        deck.cards = strapi.apiUtils.stripData(deck.cards); 
+        deck.classes = strapi.apiUtils.stripData(deck.classes); 
+        deck.translations = strapi.apiUtils.stripData(deck.translations); 
+        
+        decks.push(deck); 
+      }
+
+      return decks; 
+    }, []);
   },
 
   /**
@@ -46,6 +53,13 @@ module.exports = {
     }
 
     return strapi.services.deck.fetch(ctx.params);
+  },
+
+  findOneOrCreate: async(ctx) => {
+    const deck = await strapi.services.deck.fetchOrAdd(ctx.request.body); 
+    if(deck) return deck; 
+    
+    return ctx.response.notAcceptable('A name or id is required for this method'); 
   },
 
   /**

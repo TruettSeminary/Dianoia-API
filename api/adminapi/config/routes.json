@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/adminapi/card",
+      "handler": "Adminapi.findCard",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/adminapi/deck",
+      "handler": "Adminapi.findDeck",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/adminapi/translation",
+      "handler": "Adminapi.findTranslation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/adminapi/translation",
+      "handler": "Adminapi.createTranslation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/adminapi/translation/:_id",
+      "handler": "Adminapi.updateTranslation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/adminapi/translation/:_id",
+      "handler": "Adminapi.destroyTranslation",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

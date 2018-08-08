@@ -9,23 +9,17 @@
 module.exports = {
 
   /**
-  * Count translation records.
-  *
-  * @return {Number}
-  */
-
-  count: async (ctx) => {
-    return strapi.services.translation.count(ctx.query);
-  },
-
-  /**
    * Retrieve translation records.
    *
    * @return {Object|Array}
    */
 
   find: async (ctx) => {
-    return strapi.services.translation.fetchAll(ctx.query);
+    if (ctx.query._q) {
+      return strapi.services.translation.search(ctx.query);
+    } else {
+      return strapi.services.translation.fetchAll(ctx.query);
+    }
   },
 
   /**
@@ -40,6 +34,16 @@ module.exports = {
     }
 
     return strapi.services.translation.fetch(ctx.params);
+  },
+
+  /**
+   * Count translation records.
+   *
+   * @return {Number}
+   */
+
+  count: async (ctx) => {
+    return strapi.services.translation.count(ctx.query);
   },
 
   /**

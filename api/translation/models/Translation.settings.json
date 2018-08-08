@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "translation",
   "info": {
     "name": "translation",
     "description": "Sentences to practice translation. "
@@ -9,18 +9,31 @@
     "timestamps": true
   },
   "attributes": {
-    "original_sentence": {
+    "sentence": {
       "type": "string",
       "required": true
     },
-    "translated_sentence": {
-      "type": "string",
-      "required": true
+    "scripture": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "text"
+    },
+    "decks": {
+      "collection": "deck",
+      "via": "translations",
+      "dominant": true
+    },
+    "metadata": {
+      "type": "json"
     },
     "cards": {
       "collection": "card",
-      "dominant": true,
-      "via": "translations"
+      "via": "translations",
+      "dominant": true
     }
   }
 }
