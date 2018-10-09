@@ -38,7 +38,7 @@ module.exports = {
       .where(convertedParams.where)
       .sort(convertedParams.sort)
       .skip(convertedParams.start)
-      .limit(convertedParams.limit)
+      // .limit(convertedParams.limit)
       .populate(
           _.keys(
               _.groupBy(
